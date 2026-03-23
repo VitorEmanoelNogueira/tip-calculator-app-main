@@ -16,29 +16,93 @@
 </head>
 <body>
 
-  Bill
+  <main>
+    <img src="./images/logo.svg" alt="Splitter">
+    
+    <div>
+      <form id="tip-form">
+        <label for="bill">Bill</label>
+        <input 
+        type="number" 
+        id="bill" 
+        name="bill" 
+        required
+        >
 
-  Select Tip %
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
+        <fieldset>
+          <legend>Select Tip %</legend>
 
-  Number of People
+          <label>
+            <input type="radio" name="tip" value="5">
+            5%
+          </label>
 
-  Tip Amount
-  / person
+          <label>
+            <input type="radio" name="tip" value="10">
+            10%
+          </label>
 
-  Total
-  / person
+          <label>
+            <input type="radio" name="tip" value="15">
+            15%
+          </label>
 
-  Reset
+          <label>
+            <input type="radio" name="tip" value="25">
+            25%
+          </label>
+
+          <label>
+            <input type="radio" name="tip" value="50">
+            50%
+          </label>
+
+          <input
+          type="number"
+          name="tip-custom"
+          placeholder="Custom"
+          aria-label="Custom tip percentage"
+          min="0"
+          step="1"
+          >
+        </fieldset>
+
+        <label for="num-people">Number of People</label>
+        <input 
+        type="number" 
+        id="num-people" 
+        name="num-people" 
+        min="1"
+        required
+        >
+      </form>
+      <div>
+        <div>
+          <p>
+            Tip Amount
+            <span>/ person</span>
+          </p>
+
+          <output id="tip-amount" aria-live="polite"></output>
+
+        </div>
+        <div>
+          <p>
+            Total
+            <span>/ person</span>
+          </p>
+
+          <output id="total" aria-live="polite"></output>
+
+        </div>
+        <button type="reset" form="tip-form">Reset</button>
+      </div>
+    </div>
+  </main>
   
-  <div class="attribution">
+  <footer class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </footer>
 </body>
 </html>
