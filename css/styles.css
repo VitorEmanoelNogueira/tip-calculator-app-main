@@ -38,6 +38,9 @@ input[type="radio"] {
 
 /* Layout */
 .l-main{
+    max-width: 31.25rem;
+    margin-inline: auto;
+    margin-block-end: 1rem;
 }
 
 .logo{
@@ -96,6 +99,10 @@ input[type="radio"] {
     font-weight: 700;
     text-align: center;
     padding-block: 0.2em;
+}
+
+.c-bill-splitter__tip-field > .c-bill-splitter__input{
+    text-align: center;
 }
 
 .c-bill-splitter__results{
