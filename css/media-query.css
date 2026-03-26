@@ -1,0 +1,51 @@
+@media screen and (min-width: 62rem) {
+    /* Layout */
+
+    body{
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+    
+    .l-main{
+        max-width: 54rem;
+        margin-inline: 0;
+        margin-block: auto;
+    }
+
+    .attribution{
+        margin-block-start: auto;
+    }
+
+    /* Component */
+
+    .c-bill-splitter{
+        display: flex;
+        min-height: 28.5rem;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .c-bill-splitter__form{
+        width: 50%;
+        padding: 1rem;
+    }
+
+    .c-bill-splitter__tip-field{
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-block: 2rem;
+    }
+
+    .c-bill-splitter__results{
+        display: flex;
+        flex-flow: column nowrap;
+        width: 50%;
+        margin-block-start: 0;
+        padding: 2.5rem;
+    }
+
+    .c-bill-splitter__reset{
+        margin-block-start: auto;
+    }
+    
+}
