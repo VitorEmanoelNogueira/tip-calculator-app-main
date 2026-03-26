@@ -10,20 +10,139 @@
     --grey50: hsl(189, 47%, 97%);
     --white: hsl(0, 100%, 100%);
 
+    /* Font-size */
+    --fs-emphasis: 1.5rem;
+    
    /* Weight */
    --w700: 700;
     
 }
 
 /* Base */
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    font: normal 1rem/1.5 "Space Mono", monospace;
+    background-color: var(--grey200);
+}
+
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+
+}
+
 
 /* Layout */
+.l-main{
+}
 
-
+.logo{
+    display: block;
+    margin-block: 3em 2em;
+    margin-inline: auto;
+}
 
 .attribution { text-align: center; }
 .attribution a { color: hsl(228, 45%, 44%); }
 
 /* Component */
+.c-bill-splitter{
+    padding: 1.5em;
+}
+
+.c-bill-splitter__form{
+    outline: 1px solid blue;
+}
+
+.c-bill-splitter__number-input, .c-bill-splitter__tip-custom{
+    text-align: end;
+}
+
+.c-bill-splitter__field-label{
+    display: block;
+    margin-block-end: 0.3em;
+}
+
+.c-bill-splitter__input{
+    display: block;
+    width: 100%;
+    font-size: var(--fs-emphasis);
+    font-weight: var(--w700);
+    text-align: end;
+    padding-block: 0.2em;
+}
+
+.c-bill-splitter__tip-field{
+    outline: 1px solid purple;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: none;
+    padding: 0;
+    margin: 1.5em 0;
+    gap: 1rem;
+}
+
+.c-bill-splitter__tip-field > .c-bill-splitter__field-label{
+    margin-block-end: 0.8em;
+}
+
+.c-bill-splitter__tip-button{
+    outline: 1px solid black;
+    font-size: var(--fs-emphasis);
+    font-weight: 700;
+    text-align: center;
+    padding-block: 0.2em;
+}
+
+.c-bill-splitter__results{
+    outline: 1px solid blue;
+    margin-block-start: 1.5em;
+    padding: 1.5em 1.3em;
+}
+
+.c-bill-splitter__result{
+    outline: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: 2em;
+}
+
+.c-bill-splitter__result-label{
+    outline: 1px solid pink
+}
+
+.c-bill-splitter__result-context{
+    display: block;
+    font-size: 0.8rem;
+}
+
+.c-bill-splitter__result-value{
+    font-size: 2rem;
+    font-weight: var(--w700);
+}
+
+.c-bill-splitter__reset{
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.6em;
+}
+
+/* Object */
+.o-surface{
+    background-color: white;
+    border-radius: 0.3rem;
+    color: var(--green900);
+}
+
+.o-surface--lg{
+    border-radius: 1rem;
+}
 
 /* State */
