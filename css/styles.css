@@ -13,9 +13,9 @@
     /* Font-size */
     --fs-emphasis: 1.5rem;
     
-   /* Weight */
-   --w700: 700;
-    
+    /* States */
+    --color-error: hsl(15, 62%, 50%);
+    --color-disabled: hsl(183, 78.77%, 34.36%);
 }
 
 /* Base */
@@ -25,8 +25,20 @@
 
 body{
     min-height: 100vh;
-    font: normal 1rem/1.5 "Space Mono", monospace;
+    font: normal 700 1rem/1.5 "Space Mono", monospace;
     background-color: var(--grey200);
+}
+
+/* Chrome, Edge, Safari */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 input[type="radio"] {
@@ -34,7 +46,6 @@ input[type="radio"] {
     opacity: 0;
 
 }
-
 
 /* Layout */
 .l-main{
@@ -49,20 +60,12 @@ input[type="radio"] {
     margin-inline: auto;
 }
 
-.attribution { text-align: center; }
+.attribution { text-align: center; font-weight: normal;}
 .attribution a { color: hsl(228, 45%, 44%); }
 
 /* Component */
 .c-bill-splitter{
-    padding: 1.5em;
-}
-
-.c-bill-splitter__form{
-    outline: 1px solid blue;
-}
-
-.c-bill-splitter__number-input, .c-bill-splitter__tip-custom{
-    text-align: end;
+    padding: 2rem 1.5rem;
 }
 
 .c-bill-splitter__field-label{
@@ -73,14 +76,24 @@ input[type="radio"] {
 .c-bill-splitter__input{
     display: block;
     width: 100%;
+    border: none;
     font-size: var(--fs-emphasis);
-    font-weight: var(--w700);
+    font-weight: var(--fw-bold);
     text-align: end;
-    padding-block: 0.2em;
+    padding-block: 0.5em;
+    padding-inline: 0.7em;
+}
+
+.c-bill-splitter__input::placeholder{
+    color: var(--green900);
+    opacity: 0.50;
+}
+
+.c-bill-splitter__input:focus{
+    outline: 0.15rem solid var(--green400);
 }
 
 .c-bill-splitter__tip-field{
-    outline: 1px solid purple;
     display: grid;
     grid-template-columns: 1fr 1fr;
     border: none;
@@ -94,56 +107,65 @@ input[type="radio"] {
 }
 
 .c-bill-splitter__tip-button{
-    outline: 1px solid black;
     font-size: var(--fs-emphasis);
-    font-weight: 700;
     text-align: center;
-    padding-block: 0.2em;
+    padding-block: 0.3em;
+}
+
+.c-bill-splitter__tip-button:hover{
+    cursor: pointer;
+    background-color: var(--grey200);
+    color: var(--green900);
 }
 
 .c-bill-splitter__tip-field > .c-bill-splitter__input{
-    text-align: center;
+    padding-block: 0.3em;
+}
+
+.c-bill-splitter__input--custom::placeholder{
+    opacity: 0.7;
 }
 
 .c-bill-splitter__results{
-    outline: 1px solid blue;
-    margin-block-start: 1.5em;
-    padding: 1.5em 1.3em;
+    margin-block-start: 2em;
+    padding: 1.5em;
 }
 
 .c-bill-splitter__result{
-    outline: 1px solid red;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-block-end: 2em;
+    margin-block: 1em;
 }
 
 .c-bill-splitter__result-label{
-    outline: 1px solid pink
+    margin: 0;
 }
 
 .c-bill-splitter__result-context{
     display: block;
     font-size: 0.8rem;
+    color: var(--grey400)
 }
 
 .c-bill-splitter__result-value{
-    font-size: 2rem;
-    font-weight: var(--w700);
+    font-size: 2.125rem;
+    color: var(--green400)
 }
 
 .c-bill-splitter__reset{
     width: 100%;
+    border: none;
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: var(--fw-bold);
     text-transform: uppercase;
-    padding: 0.6em;
+    padding-block: 0.7em;
+    margin-block-start: 1em;
 }
 
 /* Object */
 .o-surface{
-    background-color: white;
+    background-color: var(--white);
     border-radius: 0.3rem;
     color: var(--green900);
 }
@@ -152,4 +174,46 @@ input[type="radio"] {
     border-radius: 1rem;
 }
 
+.o-surface--neutral{
+    background-color: var(--grey50);
+}
+
+.o-surface--strong{
+    background-color: var(--green900);
+    color: var(--white);
+}
+
+/* Utilities */
+.u-input-icon{
+    background-repeat: no-repeat;
+    background-position: 0.75em center;
+    padding-left: 1.725em;
+}
+
+.u-input-icon--money{
+    background-image: url(/images/icon-dollar.svg);
+}
+
+.u-input-icon--person{
+    background-image: url(/images/icon-person.svg);
+}
+
 /* State */
+.is-active{
+    background-color: var(--green400);
+    color: var(--green900);
+}
+
+.is-active:hover{
+    cursor: pointer;
+    background-color: var(--grey200);
+}
+
+.is-disabled{
+    background-color: var(--color-disabled);
+    opacity: 0.4;
+}
+
+.is-error, .is-error:focus{
+    outline: 0.15rem solid var(--color-error);
+}

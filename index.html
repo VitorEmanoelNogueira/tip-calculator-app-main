@@ -30,6 +30,7 @@
         type="number" 
         id="bill" 
         name="bill" 
+        placeholder="0"
         required
         >
 
@@ -46,7 +47,7 @@
             10%
           </label>
 
-          <label class="c-bill-splitter__tip-button o-surface o-surface--emphasis">
+          <label class="c-bill-splitter__tip-button o-surface is-active">
             <input type="radio" name="tip" value="15" checked>
             15%
           </label>
@@ -62,7 +63,7 @@
           </label> 
 
           <input 
-          class="c-bill-splitter__input o-surface o-surface--neutral"
+          class="c-bill-splitter__input c-bill-splitter__input--custom o-surface o-surface--neutral"
           type="number"
           name="tip-custom"
           placeholder="Custom"
@@ -79,11 +80,12 @@
         id="num-people" 
         name="num-people" 
         min="1"
+        placeholder="0"
         required
         >
       </form>
 
-      <div class="c-bill-splitter__results o-surface o-surface--strong">
+      <div class="c-bill-splitter__results o-surface o-surface--strong o-surface--lg">
         <div class="c-bill-splitter__result">
           <p class="c-bill-splitter__result-label">
             Tip Amount
@@ -102,7 +104,7 @@
           <output id="total" class="c-bill-splitter__result-value" aria-live="polite">$0.00</output>
         </div>
 
-        <button class="c-bill-splitter__reset o-surface o-surface--emphasis" type="reset" form="tip-form">Reset</button>
+        <button class="c-bill-splitter__reset o-surface is-disabled" type="reset" form="tip-form" disabled>Reset</button>
       </div>
     </div>
   </main>

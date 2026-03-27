@@ -8,7 +8,7 @@
     }
     
     .l-main{
-        max-width: 54rem;
+        max-width: 60rem;
         margin-inline: 0;
         margin-block: auto;
     }
@@ -21,7 +21,7 @@
 
     .c-bill-splitter{
         display: flex;
-        min-height: 28.5rem;
+        min-height: 30rem;
         gap: 2rem;
         padding: 2rem;
     }
@@ -33,7 +33,7 @@
 
     .c-bill-splitter__tip-field{
         grid-template-columns: 1fr 1fr 1fr;
-        margin-block: 2rem;
+        margin-block: 3rem;
     }
 
     .c-bill-splitter__results{
@@ -42,6 +42,14 @@
         width: 50%;
         margin-block-start: 0;
         padding: 2.5rem;
+    }
+
+    .c-bill-splitter__result{
+        margin-block: 0 1.3em;
+    }
+
+    .c-bill-splitter__result-value{
+        font-size: 3rem;
     }
 
     .c-bill-splitter__reset{
