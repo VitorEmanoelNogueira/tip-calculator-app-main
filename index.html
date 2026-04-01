@@ -12,9 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="/css/styles.css">
-  <link rel="stylesheet" href="/css/media-query.css">
+  <link rel="stylesheet" href="./css/normalize.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/media-query.css">
+  <script src="./js/main.js" defer></script>
   
 </head>
 <body>
@@ -23,7 +24,7 @@
     <img src="./images/logo.svg" alt="Splitter" class="logo">
     
     <div class="c-bill-splitter o-surface o-surface--lg">
-      <form id="tip-form" class="c-bill-splitter__form">
+      <form id="tip-form" class="c-bill-splitter__form" novalidate>
         <label for="bill" class="c-bill-splitter__field-label">Bill</label>
         <input 
         class="c-bill-splitter__input o-surface o-surface--neutral u-input-icon u-input-icon--money"
@@ -32,7 +33,7 @@
         name="bill" 
         placeholder="0"
         min="0"
-        step=""
+        step="0.01"
         required
         >
 
@@ -49,8 +50,8 @@
             10%
           </label>
 
-          <label class="c-bill-splitter__tip-button o-surface is-active">
-            <input type="radio" name="tip" value="15" checked>
+          <label class="c-bill-splitter__tip-button o-surface o-surface--strong">
+            <input type="radio" name="tip" value="15">
             15%
           </label>
 
