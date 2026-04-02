@@ -1,3 +1,4 @@
+// DOM + STATE
 const billInput = document.getElementById('bill');
 const tipRadios = document.querySelectorAll('input[name="tip"]');
 const customTip = document.querySelector('[name="tip-custom"]');
@@ -9,22 +10,21 @@ const resetBtn = document.querySelector('.c-bill-splitter__reset');
 
 let activeTipButton;
 
-const handleChange = () => {
-    const billValue = Number(billInput.value);
-    const numPersons = Number(numPeopleInput.value);
-    let tip;
+// EVENT LISTENERS
+billInput.addEventListener('input', handleChange);
+numPeopleInput.addEventListener('input', handleChange);
+tipRadios.forEach((button) => button.addEventListener('click', handleButton));
+customTip.addEventListener('input', handleCustomTip);
+resetBtn.addEventListener('click', resetResultValues);
 
-    if (Number(customTip.value) > 0) {
-        tip = Number(customTip.value);
-    } else if(document.querySelector('input[name="tip"]:checked')){
-        tip = Number(document.querySelector('input[name="tip"]:checked').value);
-    }
-
+// HANDLERS
+function handleChange() {
+    const { billValue, numPeople, tip} = getFormValues();
     toggleResetButton();
-    calcSplitBill(billValue, numPersons, tip)
+    calcSplitBill(billValue, numPeople, tip)
 }
 
-const handleButton = (e) => {
+function handleButton(e) {
     if(e.target === activeTipButton){
         deactivateTipButton();
         handleChange();
@@ -41,24 +41,18 @@ const handleButton = (e) => {
     handleChange()
 }
 
-const deactivateTipButton = () => {
-    if (!activeTipButton) return;
-    activeTipButton.checked = false;
-    activeTipButton.parentElement.classList.remove('is-active');
-    activeTipButton = null;
-}
-
-const handleCustomTip = () => {
+function handleCustomTip() {
     deactivateTipButton()
     handleChange()
 }
 
-const calcSplitBill = (billValue, numPersons, tipPercentage = 0) => {
-    if (billValue <=0 || numPersons <= 0){
-        return
+// CORE LOGIC
+function calcSplitBill(billValue, numPeople, tipPercentage) {
+    if (billValue <=0 || numPeople <= 0){
+        return // invalid state
     }
 
-    const billPerPerson = billValue / numPersons;
+    const billPerPerson = billValue / numPeople;
     const tipPerPerson = billPerPerson * (tipPercentage / 100);
     const totalPerPerson = billPerPerson + tipPerPerson;
 
@@ -66,35 +60,35 @@ const calcSplitBill = (billValue, numPersons, tipPercentage = 0) => {
     showValue(tipPerPerson, totalPerPerson)
 }
 
-const showValue = (tip, total) => {
+function getFormValues() {
+    return {
+        billValue: Number(billInput.value),
+        numPeople: Number(numPeopleInput.value),
+        tip: Number(customTip.value) > 0 
+            ? Number(customTip.value)
+            : getSelectedTip()
+    }
+}
+
+function getSelectedTip() {
+    return activeTipButton ? Number(activeTipButton.value) : 0;
+}
+
+// UI HELPERS
+function showValue(tip, total) {
     tipResult.textContent = `$${tip.toFixed(2)}`;
     totalResult.textContent = `$${total.toFixed(2)}`;
 }
 
-const resetResultValues = () => {
-    if (!resetBtn.classList.contains('is-active')){
-        return
-    }
-    
-    tipResult.textContent = `$0.00`;
-    totalResult.textContent = `$0.00`;
-
-    billInput.value = '';
-    numPeopleInput.value = '';
-    customTip.value = '';
-    deactivateTipButton()
-    
-    toggleResetButton();
+function deactivateTipButton() {
+    if (!activeTipButton) return;
+    activeTipButton.checked = false;
+    activeTipButton.parentElement.classList.remove('is-active');
+    activeTipButton = null;
 }
 
-
-const toggleResetButton = () => {
-    if (
-        billInput.value === '' &&
-        numPeopleInput.value === '' &&
-        !activeTipButton &&
-        customTip.value === ''
-      ){
+function toggleResetButton() {
+    if (isFormEmpty()){
         resetBtn.classList.replace('is-active', 'is-disabled');
         resetBtn.disabled = true;
     } else{
@@ -104,9 +98,23 @@ const toggleResetButton = () => {
 
 }
 
+function isFormEmpty() {
+    return (
+        billInput.value === '' &&
+        numPeopleInput.value === '' &&
+        !activeTipButton &&
+        customTip.value === ''
+    );
+}
 
-billInput.addEventListener('input', handleChange);
-numPeopleInput.addEventListener('input', handleChange);
-tipRadios.forEach((button) => button.addEventListener('click', handleButton));
-customTip.addEventListener('input', handleCustomTip);
-resetBtn.addEventListener('click', resetResultValues);
+function resetResultValues() {
+    if (resetBtn.disabled) return;
+    showValue(0, 0);
+
+    billInput.value = '';
+    numPeopleInput.value = '';
+    customTip.value = '';
+    
+    deactivateTipButton()
+    toggleResetButton();
+}
