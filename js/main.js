@@ -86,7 +86,6 @@ function updateSplitBill(billValue, numPeople, tipPercentage) {
     const tipPerPerson = billPerPerson * (tipPercentage / 100);
     const totalPerPerson = billPerPerson + tipPerPerson;
 
-    console.log(`$Total: ${totalPerPerson} Tip: ${tipPerPerson}`);
     showValue(tipPerPerson, totalPerPerson)
 }
 

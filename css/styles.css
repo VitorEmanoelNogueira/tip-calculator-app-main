@@ -200,11 +200,11 @@ input[type="radio"] {
 }
 
 .u-input-icon--money{
-    background-image: url(/images/icon-dollar.svg);
+    background-image: url(../images/icon-dollar.svg);
 }
 
 .u-input-icon--person{
-    background-image: url(/images/icon-person.svg);
+    background-image: url(../images/icon-person.svg);
 }
 
 /* State */
