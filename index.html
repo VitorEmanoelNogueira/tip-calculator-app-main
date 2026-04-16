@@ -76,7 +76,10 @@
           >
         </fieldset>
 
-        <label for="num-people" class="c-bill-splitter__field-label">Number of People</label>
+        <div class="c-bill-splitter__field-header">
+          <label for="num-people" class="c-bill-splitter__field-label">Number of People</label>
+          <span class="c-bill-splitter__error c-bill-splitter__error--num-people" aria-live="polite"></span>
+        </div>
         <input 
         class="c-bill-splitter__input o-surface o-surface--neutral u-input-icon u-input-icon--person"
         type="number" 

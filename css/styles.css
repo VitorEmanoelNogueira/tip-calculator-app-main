@@ -73,6 +73,15 @@ input[type="radio"] {
     margin-block-end: 0.3em;
 }
 
+.c-bill-splitter__field-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.c-bill-splitter__error{
+    color: var(--color-error);
+}
+
 .c-bill-splitter__input{
     display: block;
     width: 100%;

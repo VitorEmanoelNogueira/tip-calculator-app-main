@@ -8,11 +8,16 @@ const tipResult = document.getElementById('tip-amount');
 const totalResult = document.getElementById('total');
 const resetBtn = document.querySelector('.c-bill-splitter__reset');
 
+const numPeopleError = document.querySelector('.c-bill-splitter__error--num-people')
+
 let activeTipButton;
 
 // EVENT LISTENERS
 billInput.addEventListener('input', handleChange);
-numPeopleInput.addEventListener('input', handleChange);
+numPeopleInput.addEventListener('input', () => {
+    toggleResetButton();
+    validateNumberOfPeople();
+});
 tipRadios.forEach((button) => button.addEventListener('click', handleButton));
 customTip.addEventListener('input', handleCustomTip);
 resetBtn.addEventListener('click', resetResultValues);
@@ -21,7 +26,7 @@ resetBtn.addEventListener('click', resetResultValues);
 function handleChange() {
     const { billValue, numPeople, tip} = getFormValues();
     toggleResetButton();
-    calcSplitBill(billValue, numPeople, tip)
+    updateSplitBill(billValue, numPeople, tip)
 }
 
 function handleButton(e) {
@@ -46,10 +51,35 @@ function handleCustomTip() {
     handleChange()
 }
 
+// VALIDATION
+function validateNumberOfPeople() {
+    const v = numPeopleInput.validity
+    const value = Number(numPeopleInput.value)
+
+    if (v.rangeUnderflow){
+        if (value === 0) {
+            showError("Can't be zero");
+            return;
+        } else {
+            showError("Can't be negative");
+            return;
+        }
+    }
+
+    if(v.stepMismatch){
+        showError('No decimals allowed');
+        return;
+    }
+
+    clearError();
+    handleChange();
+}
+
 // CORE LOGIC
-function calcSplitBill(billValue, numPeople, tipPercentage) {
-    if (billValue <=0 || numPeople <= 0){
-        return // invalid state
+function updateSplitBill(billValue, numPeople, tipPercentage) {
+    if (billValue <= 0 || numPeople <= 0){
+        showValue(0, 0);
+        return
     }
 
     const billPerPerson = billValue / numPeople;
@@ -78,6 +108,16 @@ function getSelectedTip() {
 function showValue(tip, total) {
     tipResult.textContent = `$${tip.toFixed(2)}`;
     totalResult.textContent = `$${total.toFixed(2)}`;
+}
+
+function showError(msg){
+    numPeopleInput.classList.add('is-error');
+    numPeopleError.textContent = msg;
+}
+
+function clearError(){
+    numPeopleInput.classList.remove('is-error');
+    numPeopleError.textContent = '';
 }
 
 function deactivateTipButton() {
