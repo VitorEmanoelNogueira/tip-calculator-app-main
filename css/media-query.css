@@ -57,3 +57,18 @@
     }
     
 }
+
+@media screen and (min-width: 110rem){
+    html{
+        font-size: 120%;
+    }
+
+    .logo{
+        width: 6rem;
+    }
+}
+
+/* @media screen and (min-width: 100rem){
+    html{
+        font-size: 112.5%;
+    } */
