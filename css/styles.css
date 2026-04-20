@@ -125,6 +125,7 @@ input[type="radio"] {
     cursor: pointer;
     background-color: var(--grey200);
     color: var(--green900);
+    transition: all 0.3s ease;
 }
 
 .c-bill-splitter__tip-field > .c-bill-splitter__input{
@@ -216,6 +217,7 @@ input[type="radio"] {
 .is-active:hover{
     cursor: pointer;
     background-color: var(--grey200);
+    transition: all 0.3s ease;
 }
 
 .is-disabled{
