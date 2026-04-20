@@ -24,9 +24,9 @@ resetBtn.addEventListener('click', resetResultValues);
 
 // HANDLERS
 function handleChange() {
-    const { billValue, numPeople, tip} = getFormValues();
+    const { billValue, numPeople, tip } = getFormValues();
     toggleResetButton();
-    updateSplitBill(billValue, numPeople, tip)
+    updateSplitBill(billValue, numPeople, tip);
 }
 
 function handleButton(e) {
@@ -43,18 +43,18 @@ function handleButton(e) {
     activeTipButton = e.target;
     customTip.value = '';
 
-    handleChange()
+    handleChange();
 }
 
 function handleCustomTip() {
-    deactivateTipButton()
-    handleChange()
+    deactivateTipButton();
+    handleChange();
 }
 
 // VALIDATION
 function validateNumberOfPeople() {
-    const v = numPeopleInput.validity
-    const value = Number(numPeopleInput.value)
+    const v = numPeopleInput.validity;
+    const value = Number(numPeopleInput.value);
 
     if (v.rangeUnderflow){
         if (value === 0) {
@@ -86,7 +86,7 @@ function updateSplitBill(billValue, numPeople, tipPercentage) {
     const tipPerPerson = billPerPerson * (tipPercentage / 100);
     const totalPerPerson = billPerPerson + tipPerPerson;
 
-    showValue(tipPerPerson, totalPerPerson)
+    showValue(tipPerPerson, totalPerPerson);
 }
 
 function getFormValues() {
@@ -154,6 +154,6 @@ function resetResultValues() {
     numPeopleInput.value = '';
     customTip.value = '';
     
-    deactivateTipButton()
+    deactivateTipButton();
     toggleResetButton();
 }
