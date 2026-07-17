@@ -67,3 +67,19 @@
         width: 6rem;
     }
 }
+
+@media (forced-colors: active){
+    .c-bill-splitter, .c-bill-splitter__input, .c-bill-splitter__tip-button, .c-bill-splitter__results,.c-bill-splitter__reset{
+        border: 0.1rem solid currentColor;
+    }
+
+    .c-bill-splitter__tip-button:hover{
+        border-color: highlight;
+        transition: none;
+    }
+
+    .c-bill-splitter__tip-button.is-active{
+        border-width: 0.2rem;
+        outline: 0.2rem solid currentColor;
+    }
+}
