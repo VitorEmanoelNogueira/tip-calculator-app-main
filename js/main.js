@@ -7,10 +7,12 @@ const numPeopleInput = document.getElementById('num-people');
 const tipResult = document.getElementById('tip-amount');
 const totalResult = document.getElementById('total');
 const resetBtn = document.querySelector('.c-bill-splitter__reset');
+const resultAnnouncement = document.getElementById('results-announcement');
 
 const numPeopleError = document.querySelector('.c-bill-splitter__error--num-people')
 
 let activeTipButton;
+let annoucementTimeOut;
 
 // EVENT LISTENERS
 billInput.addEventListener('input', handleChange);
@@ -18,7 +20,7 @@ numPeopleInput.addEventListener('input', () => {
     toggleResetButton();
     validateNumberOfPeople();
 });
-tipRadios.forEach((button) => button.addEventListener('click', handleButton));
+tipRadios.forEach((button) => button.addEventListener('change', handleButton));
 customTip.addEventListener('input', handleCustomTip);
 resetBtn.addEventListener('click', resetResultValues);
 
@@ -78,7 +80,7 @@ function validateNumberOfPeople() {
 // CORE LOGIC
 function updateSplitBill(billValue, numPeople, tipPercentage) {
     if (billValue <= 0 || numPeople <= 0){
-        showValue(0, 0);
+        updateResults(0, 0);
         return
     }
 
@@ -86,7 +88,7 @@ function updateSplitBill(billValue, numPeople, tipPercentage) {
     const tipPerPerson = billPerPerson * (tipPercentage / 100);
     const totalPerPerson = billPerPerson + tipPerPerson;
 
-    showValue(tipPerPerson, totalPerPerson);
+    updateResults(tipPerPerson, totalPerPerson);
 }
 
 function getFormValues() {
@@ -104,9 +106,15 @@ function getSelectedTip() {
 }
 
 // UI HELPERS
-function showValue(tip, total) {
+function updateResults(tip, total) {
     tipResult.textContent = `$${tip.toFixed(2)}`;
     totalResult.textContent = `$${total.toFixed(2)}`;
+
+    // Delay result announcement to allow screen reader to announce input changes first
+    clearTimeout(annoucementTimeOut)
+    annoucementTimeOut = setTimeout(() => {
+        resultAnnouncement.textContent = `Tip amount ${tip.toFixed(2)}. Total ${total.toFixed(2)}.`;
+    }, 500)
 }
 
 function showError(msg){
@@ -148,7 +156,7 @@ function isFormEmpty() {
 
 function resetResultValues() {
     if (resetBtn.disabled) return;
-    showValue(0, 0);
+    updateResults(0, 0);
 
     billInput.value = '';
     numPeopleInput.value = '';
