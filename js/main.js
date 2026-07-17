@@ -9,17 +9,19 @@ const totalResult = document.getElementById('total');
 const resetBtn = document.querySelector('.c-bill-splitter__reset');
 const resultAnnouncement = document.getElementById('results-announcement');
 
-const numPeopleError = document.querySelector('.c-bill-splitter__error--num-people')
+const billError = document.getElementById('bill-error');
+const numPeopleError = document.getElementById('num-people-error')
 
 let activeTipButton;
 let annoucementTimeOut;
 
 // EVENT LISTENERS
-billInput.addEventListener('input', handleChange);
-numPeopleInput.addEventListener('input', () => {
-    toggleResetButton();
-    validateNumberOfPeople();
-});
+[billInput, numPeopleInput].forEach((input) => {
+    input.addEventListener('input', (e) => {
+        validateInput(e.target)
+    })
+})
+
 tipRadios.forEach((button) => button.addEventListener('change', handleButton));
 customTip.addEventListener('input', handleCustomTip);
 resetBtn.addEventListener('click', resetResultValues);
@@ -54,26 +56,33 @@ function handleCustomTip() {
 }
 
 // VALIDATION
-function validateNumberOfPeople() {
-    const v = numPeopleInput.validity;
-    const value = Number(numPeopleInput.value);
+function validateInput(input) {
+    const v = input.validity;
+    const value = Number(input.value);
+    toggleResetButton();
+    
 
     if (v.rangeUnderflow){
         if (value === 0) {
-            showError("Can't be zero");
+            showError(input, "Can't be zero");
             return;
         } else {
-            showError("Can't be negative");
+            showError(input, "Can't be negative");
             return;
         }
     }
 
     if(v.stepMismatch){
-        showError('No decimals allowed');
+        if(input === billInput){
+        showError(input, 'No more than 2 decimals');
         return;
+        } else{
+            showError(input, 'No decimals allowed');
+            return;
+        }
     }
 
-    clearError();
+    clearError(input);
     handleChange();
 }
 
@@ -113,18 +122,32 @@ function updateResults(tip, total) {
     // Delay result announcement to allow screen reader to announce input changes first
     clearTimeout(annoucementTimeOut)
     annoucementTimeOut = setTimeout(() => {
-        resultAnnouncement.textContent = `Tip amount ${tip.toFixed(2)}. Total ${total.toFixed(2)}.`;
+        resultAnnouncement.textContent = `Tip amount per person ${tip.toFixed(2)}. Total per person ${total.toFixed(2)}.`;
     }, 500)
 }
 
-function showError(msg){
-    numPeopleInput.classList.add('is-error');
-    numPeopleError.textContent = msg;
+function showError(input, msg){
+    if (input === billInput){
+        billInput.classList.add('is-error');
+        billError.textContent = msg;
+    }
+    
+    if (input === numPeopleInput){
+        numPeopleInput.classList.add('is-error');
+        numPeopleError.textContent = msg;
+    }
 }
 
-function clearError(){
+function clearError(input){
+    if (input === billInput){
+        billInput.classList.remove('is-error');
+        billError.textContent = '';
+    }
+
+    if (input === numPeopleInput){
     numPeopleInput.classList.remove('is-error');
     numPeopleError.textContent = '';
+    }
 }
 
 function deactivateTipButton() {
